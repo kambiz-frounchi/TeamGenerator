@@ -10,11 +10,11 @@ The app uses inquirer for the CLI. It has also taken advantage of the async/awai
 
 ## Instructions
 
-You can install this application by cloning the github repo (`git clone git@github.com:kambiz-frounchi/TeamGenerator.git`),running `npm install` in the cloned folder to install the dependencies and then using Node.js `node app` to run the application.
+You can install this application by cloning the github repo (`git clone git@github.com:kambiz-frounchi/TeamGenerator.git`), running `npm install` in the cloned folder to install the dependencies and then using Node.js (`node app`) to run the application.
 
 ## Usage
 
-Please find [this walkthrough video](https://drive.google.com/file/d/17ywW8csKMsog2ZhSfavUWvE5m1Kb6DBl/view?usp=sharing) that show cases the application.
+Please find [this walkthrough video](https://drive.google.com/file/d/17ywW8csKMsog2ZhSfavUWvE5m1Kb6DBl/view?usp=sharing) that showcases the application.
 
 ## Tests
 
