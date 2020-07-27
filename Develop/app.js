@@ -75,30 +75,11 @@ const internQuestions = [
     }
 ]
 
+const employees = [];
+
 //ask what time of employee the user intends to add
 //ask questions regarding employee
 //ask whether the user intends to add any more employees
-
-/*
-handleEmployee = async (employeeType) => {
-    const {employeeName, employeeId, employeeEmail} = await inquirer.prompt(employeeQuestions);
-    console.log(employeeType);
-    if (employeeType === `Manager`) {
-        const { officeNumber } = await inquirer.prompt(managerQuestions);
-        const manager = new Manager(employeeName, employeeId, employeeEmail, officeNumber);
-        console.log(manager);
-    } else if (employeeType === `Engineer`) {
-        const { githubUsername } = await inquirer.prompt(engineerQuestions);
-        const engineer = new Engineer(employeeName, employeeId, employeeEmail, githubUsername);
-        console.log(engineer);
-    } else if (employeeType === `Intern`) {
-        const { school } = await inquirer.prompt(internQuestions);
-        const intern = new Intern(employeeName, employeeId, employeeEmail, school);
-        console.log(intern);
-    }
-};
-*/
-const employees = [];
 
 ask = async () => {
     const { employeeType } = await inquirer.prompt(typeOfEmployeeQuestion);
@@ -106,17 +87,14 @@ ask = async () => {
     if (employeeType === `Manager`) {
         const { officeNumber } = await inquirer.prompt(managerQuestions);
         const manager = new Manager(employeeName, employeeId, employeeEmail, officeNumber);
-        console.log(manager);
         employees.push(manager);
     } else if (employeeType === `Engineer`) {
         const { githubUsername } = await inquirer.prompt(engineerQuestions);
         const engineer = new Engineer(employeeName, employeeId, employeeEmail, githubUsername);
-        console.log(engineer);
         employees.push(engineer);
     } else if (employeeType === `Intern`) {
         const { school } = await inquirer.prompt(internQuestions);
         const intern = new Intern(employeeName, employeeId, employeeEmail, school);
-        console.log(intern);
         employees.push(intern);
     }
 

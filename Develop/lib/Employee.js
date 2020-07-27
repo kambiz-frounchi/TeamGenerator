@@ -2,10 +2,16 @@ class Employee {
     constructor (name, id, email) {
         this.role = `Employee`;
         if (name) {
+            if (typeof(name) != `string`) {
+                throw Error(`name has to be a string`);
+            }
             this.name = name;
         }
 
         if (id) {
+            if (typeof(id) != `number`) {
+                throw Error(`id has to be a number`);
+            }
             this.id = id;
         }
         
