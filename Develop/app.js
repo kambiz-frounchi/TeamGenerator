@@ -4,12 +4,16 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
+const util = require("util");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 const Employee = require("./lib/Employee");
+
+const readFile = util.promisify(fs.readFile);
+const writeFile = util.promisify(fs.writeFile);
 
 const typeOfEmployeeQuestion = [
     {
@@ -71,9 +75,6 @@ const internQuestions = [
     }
 ]
 
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
-
 //ask what time of employee the user intends to add
 //ask questions regarding employee
 //ask whether the user intends to add any more employees
@@ -97,6 +98,7 @@ handleEmployee = async (employeeType) => {
     }
 };
 */
+const employees = [];
 
 ask = async () => {
     const { employeeType } = await inquirer.prompt(typeOfEmployeeQuestion);
@@ -105,37 +107,30 @@ ask = async () => {
         const { officeNumber } = await inquirer.prompt(managerQuestions);
         const manager = new Manager(employeeName, employeeId, employeeEmail, officeNumber);
         console.log(manager);
+        employees.push(manager);
     } else if (employeeType === `Engineer`) {
         const { githubUsername } = await inquirer.prompt(engineerQuestions);
         const engineer = new Engineer(employeeName, employeeId, employeeEmail, githubUsername);
         console.log(engineer);
+        employees.push(engineer);
     } else if (employeeType === `Intern`) {
         const { school } = await inquirer.prompt(internQuestions);
         const intern = new Intern(employeeName, employeeId, employeeEmail, school);
         console.log(intern);
+        employees.push(intern);
     }
 
     inquirer.prompt(anotherEmployeeQuestion).
     then((answers) => {
         if (answers.anotherEmployee) {
             ask();
+        } else {
+            const html = render(employees);
+            writeFile(outputPath, html).catch((err) => {
+                console.log(err);
+            });
         }
     });
 };
 
 ask();
-
-// After the user has input all employees desired, call the `render` function (required
-// above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML including templated divs for each employee!
-
-// After you have your html, you're now ready to create an HTML file using the HTML
-// returned from the `render` function. Now write it to a file named `team.html` in the
-// `output` folder. You can use the variable `outputPath` above target this location.
-// Hint: you may need to check if the `output` folder exists and create it if it
-// does not.
-
-// HINT: each employee type (manager, engineer, or intern) has slightly different
-// information; write your code to ask different questions via inquirer depending on
-// employee type.
-
